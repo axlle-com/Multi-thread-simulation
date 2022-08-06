@@ -1,9 +1,15 @@
 package com.axlle.models.island;
 
-public class Island {
+import com.axlle.Main;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Island implements Runnable {
     public static final int X = 3;
     public static final int Y = 3;
     public static Location[][] locations = new Location[X][Y];
+    ExecutorService executor = Executors.newFixedThreadPool(Island.X * Island.Y);
 
     public void initialize() {
         for (int i = 0; i < locations.length; i++) {
@@ -17,10 +23,10 @@ public class Island {
     public void run() {
         for (Location[] location : locations) {
             for (Location value : location) {
-                value.life();
-                value.clear();
+                executor.execute(value);
             }
         }
+        System.out.println("Основной поток: " + (System.currentTimeMillis() - Main.time));
     }
 
     public void print() {

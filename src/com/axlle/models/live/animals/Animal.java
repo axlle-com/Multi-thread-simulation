@@ -84,15 +84,10 @@ public abstract class Animal extends Live {
         }
     }
 
-    public void chooseDirection() {
-
-    }
-
     public void move(int x, int y) {
         if (this.getSpeed() > 0 && this.isLive()) {
             int newX = x;
             int newY = y;
-            this.chooseDirection();
             int step = ThreadLocalRandom.current().nextInt(-this.getSpeed(), this.getSpeed() + 1);
             if (step > 0) {
                 if (ThreadLocalRandom.current().nextInt(0, 2) == 1) {

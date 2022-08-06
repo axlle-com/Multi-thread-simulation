@@ -1,5 +1,6 @@
 package com.axlle.models.island;
 
+import com.axlle.Main;
 import com.axlle.models.live.Live;
 import com.axlle.models.live.animals.Animal;
 import com.axlle.models.live.animals.herbivores.*;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class Location {
+public class Location implements Runnable {
     HashMap<String, Live> lives = new HashMap<>();
     HashMap<String, Live> newLives = new HashMap<>();
     HashMap<String, Live> newborn = new HashMap<>();
@@ -19,20 +20,20 @@ public class Location {
     HashMap<String, Integer> maxLives = new HashMap<>() {{
         put(Bear.class.getName(), 5);
         put(Boa.class.getName(), 30);
-        put(Eagle.class.getName(), 20);
         put(Fox.class.getName(), 30);
         put(Wolf.class.getName(), 30);
         put(Boar.class.getName(), 50);
-        put(Buffalo.class.getName(), 10);
-        put(Caterpillar.class.getName(), 1000);
         put(Deer.class.getName(), 20);
         put(Duck.class.getName(), 200);
         put(Goat.class.getName(), 140);
+        put(Eagle.class.getName(), 20);
         put(Horse.class.getName(), 20);
         put(Mouse.class.getName(), 500);
-        put(Rabbit.class.getName(), 150);
         put(Sheep.class.getName(), 140);
         put(Plant.class.getName(), 200);
+        put(Rabbit.class.getName(), 150);
+        put(Buffalo.class.getName(), 10);
+        put(Caterpillar.class.getName(), 1000);
     }};
     private int x;
     private int y;
@@ -40,7 +41,7 @@ public class Location {
     public Location(int x, int y) {
         this.x = x;
         this.y = y;
-        this.start();
+        this.init();
     }
 
     public int getX() {
@@ -61,7 +62,14 @@ public class Location {
         return this;
     }
 
-    private void start() {
+    public void run() {
+        this.life();
+        this.clear();
+        System.out.println(this);
+        System.out.println(System.currentTimeMillis() - Main.time);
+    }
+
+    public void init() {
         for (Map.Entry<String, Integer> entry : maxLives.entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
@@ -79,7 +87,7 @@ public class Location {
         }
     }
 
-    public void life() {
+    public synchronized void life() {
         if (newLives.size() > 0) {
             lives.putAll(newLives);
         }
@@ -105,8 +113,7 @@ public class Location {
         }
     }
 
-    // зачищаем локацию после итерации
-    public void clear() {
+    public synchronized void clear() {
         HashMap<String, Integer> count = new HashMap<>();
         lives.putAll(newborn);
         newborn.clear();
@@ -139,16 +146,6 @@ public class Location {
         }
     }
 
-    private void putCurrentLives(Live target) {
-        String name = target.getClass().getSimpleName();
-        int temp = 0;
-        if (currentLives.containsKey(name)) {
-            temp = currentLives.get(name);
-        }
-        temp++;
-        currentLives.put(name, temp);
-    }
-
     public boolean migration(Animal animal) {
         Integer x = animal.getMoveToX();
         Integer y = animal.getMoveToY();
@@ -174,5 +171,15 @@ public class Location {
                 + " - Мигранты: " + newLives.size() + "\n"
                 + " - Детально: " + currentLives + "\n"
                 + "********************";
+    }
+
+    private void putCurrentLives(Live target) {
+        String name = target.getClass().getSimpleName();
+        int temp = 0;
+        if (currentLives.containsKey(name)) {
+            temp = currentLives.get(name);
+        }
+        temp++;
+        currentLives.put(name, temp);
     }
 }
