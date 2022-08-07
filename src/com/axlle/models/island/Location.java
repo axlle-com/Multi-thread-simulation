@@ -90,13 +90,12 @@ public class Location implements Runnable {
     public synchronized void life() {
         if (newLives.size() > 0) {
             lives.putAll(newLives);
+            newLives.clear();
         }
         for (Map.Entry<String, Live> current : lives.entrySet()) {
-            String key = current.getKey();
             Live value = current.getValue();
             if (value.isLive()) {
                 for (Map.Entry<String, Live> target : lives.entrySet()) {
-                    String targetKey = target.getKey();
                     Live targetValue = target.getValue();
                     if (value instanceof Animal animal) {
                         animal.eat(targetValue);
