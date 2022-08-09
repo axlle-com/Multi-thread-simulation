@@ -1,6 +1,7 @@
 package com.axlle.models.island;
 
 import com.axlle.Main;
+import com.axlle.config.Settings;
 import com.axlle.models.live.Live;
 import com.axlle.models.live.animals.Animal;
 import com.axlle.models.live.animals.herbivores.*;
@@ -13,8 +14,8 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class Location implements Runnable {
+    final HashMap<String, Live> newLives = new HashMap<>();
     HashMap<String, Live> lives = new HashMap<>();
-    HashMap<String, Live> newLives = new HashMap<>();
     HashMap<String, Live> newborn = new HashMap<>();
     HashMap<String, Integer> currentLives = new HashMap<>();
     HashMap<String, Integer> maxLives = new HashMap<>() {{
@@ -70,7 +71,7 @@ public class Location implements Runnable {
     }
 
     public void init() {
-        for (Map.Entry<String, Integer> entry : maxLives.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Settings.inst().maxLives.entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
             for (int i = 0; i < value; i++) {
@@ -87,10 +88,12 @@ public class Location implements Runnable {
         }
     }
 
-    public synchronized void life() {
+    public void life() {
         if (newLives.size() > 0) {
             lives.putAll(newLives);
-            newLives.clear();
+            synchronized (this.newLives){
+                newLives.clear();
+            }
         }
         for (Map.Entry<String, Live> current : lives.entrySet()) {
             Live value = current.getValue();
@@ -112,7 +115,7 @@ public class Location implements Runnable {
         }
     }
 
-    public synchronized void clear() {
+    public void clear() {
         HashMap<String, Integer> count = new HashMap<>();
         lives.putAll(newborn);
         newborn.clear();
@@ -152,8 +155,10 @@ public class Location implements Runnable {
             return false;
         }
         try {
-            Location location = Island.locations[x][y];
-            location.newLives.put(animal.getUuid(), animal);
+            synchronized(Island.locations[x][y].newLives){
+                Location location = Island.locations[x][y];
+                location.newLives.put(animal.getUuid(), animal);
+            }
             return true;
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
