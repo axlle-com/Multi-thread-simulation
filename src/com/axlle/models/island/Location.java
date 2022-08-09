@@ -18,24 +18,6 @@ public class Location implements Runnable {
     HashMap<String, Live> lives = new HashMap<>();
     HashMap<String, Live> newborn = new HashMap<>();
     HashMap<String, Integer> currentLives = new HashMap<>();
-    HashMap<String, Integer> maxLives = new HashMap<>() {{
-        put(Bear.class.getName(), 5);
-        put(Boa.class.getName(), 30);
-        put(Fox.class.getName(), 30);
-        put(Wolf.class.getName(), 30);
-        put(Boar.class.getName(), 50);
-        put(Deer.class.getName(), 20);
-        put(Duck.class.getName(), 200);
-        put(Goat.class.getName(), 140);
-        put(Eagle.class.getName(), 20);
-        put(Horse.class.getName(), 20);
-        put(Mouse.class.getName(), 500);
-        put(Sheep.class.getName(), 140);
-        put(Plant.class.getName(), 200);
-        put(Rabbit.class.getName(), 150);
-        put(Buffalo.class.getName(), 10);
-        put(Caterpillar.class.getName(), 1000);
-    }};
     private int x;
     private int y;
 
@@ -71,18 +53,18 @@ public class Location implements Runnable {
     }
 
     public void init() {
-        for (Map.Entry<String, Integer> entry : Settings.inst().maxLives.entrySet()) {
+        for (Map.Entry<String, Integer> entry : Settings.inst().getMaxLives().entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
             for (int i = 0; i < value; i++) {
                 try {
                     Class<?> clazz = Class.forName(key);
                     Constructor<?> constructor = clazz.getConstructor();
-                    var newInstance = (Live) constructor.newInstance();
+                    Live newInstance = (Live) constructor.newInstance();
                     lives.put(newInstance.getUuid(), newInstance);
                     this.putCurrentLives(newInstance);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 }
             }
         }
@@ -136,7 +118,7 @@ public class Location implements Runnable {
                         temp = count.get(name);
                     }
                     temp++;
-                    if (this.maxLives.containsKey(name) && temp > this.maxLives.get(name)) {
+                    if (Settings.inst().getMaxLives().containsKey(name) && temp > Settings.inst().getMaxLives().get(name)) {
                         it.remove();
                     } else {
                         count.put(name, temp);

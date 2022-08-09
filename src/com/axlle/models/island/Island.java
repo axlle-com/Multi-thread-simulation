@@ -1,13 +1,14 @@
 package com.axlle.models.island;
 
 import com.axlle.Main;
+import com.axlle.config.Settings;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Island implements Runnable {
-    public static final int X = 3;
-    public static final int Y = 3;
+    public static final int X = Settings.inst().getX();
+    public static final int Y = Settings.inst().getY();
     public static Location[][] locations = new Location[X][Y];
     ExecutorService executor = Executors.newFixedThreadPool(Island.X * Island.Y);
 

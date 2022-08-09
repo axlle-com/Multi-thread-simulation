@@ -9,18 +9,20 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class Settings {
-    public HashMap<String, Integer> maxLives;
     private static volatile Settings self;
+    private HashMap<String, Integer> maxLives;
+    private int x;
+    private int y;
 
-    private Settings(){
+    private Settings() {
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            File file = new File(Objects.requireNonNull(classLoader.getResource("com/axlle/init.yml")).getFile());
+            File file = new File(Objects.requireNonNull(classLoader.getResource("com/axlle/config/init.yml")).getFile());
 
             ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
-            self = mapper.readValue(file, Settings.class);
-        }catch (IOException e){
-            System.out.println(e.getMessage());
+            Settings.self = mapper.readValue(file, Settings.class);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -31,5 +33,26 @@ public class Settings {
             }
         }
         return Settings.self;
+    }
+
+    @Override
+    public String toString() {
+        return "Settings{" +
+                "maxLives=" + maxLives +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    public HashMap<String, Integer> getMaxLives() {
+        return maxLives;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }

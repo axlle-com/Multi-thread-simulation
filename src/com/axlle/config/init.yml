@@ -1,9 +1,11 @@
+x: 3
+y: 3
 maxLives:
   "com.axlle.models.live.animals.predators.Bear": 5
-  "com.axlle.models.live.animals.herbivores.Boa": 30
+  "com.axlle.models.live.animals.predators.Boa": 30
   "com.axlle.models.live.animals.predators.Fox": 30
   "com.axlle.models.live.animals.predators.Wolf": 30
-  "com.axlle.models.live.animals.predators.Boar": 50
+  "com.axlle.models.live.animals.herbivores.Boar": 50
   "com.axlle.models.live.animals.herbivores.Deer": 20
   "com.axlle.models.live.animals.herbivores.Duck": 200
   "com.axlle.models.live.animals.herbivores.Goat": 140

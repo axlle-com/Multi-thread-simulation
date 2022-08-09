@@ -11,9 +11,6 @@ public class Main {
     public static long time;
 
     public static void main(String[] args) {
-        System.out.println(Settings.inst().maxLives);
-        System.out.println("=========================");
-
         time = System.currentTimeMillis();
         Island island = new Island();
         island.initialize();
