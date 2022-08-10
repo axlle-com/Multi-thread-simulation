@@ -53,7 +53,7 @@ public class Location implements Runnable {
     }
 
     public void init() {
-        for (Map.Entry<String, Integer> entry : Settings.inst().getMaxLives().entrySet()) {
+        for (Map.Entry<String, Integer> entry : Settings.getMaxLives().entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
             for (int i = 0; i < value; i++) {
@@ -118,7 +118,7 @@ public class Location implements Runnable {
                         temp = count.get(name);
                     }
                     temp++;
-                    if (Settings.inst().getMaxLives().containsKey(name) && temp > Settings.inst().getMaxLives().get(name)) {
+                    if (Settings.getMaxLives().containsKey(name) && temp > Settings.getMaxLives().get(name)) {
                         it.remove();
                     } else {
                         count.put(name, temp);

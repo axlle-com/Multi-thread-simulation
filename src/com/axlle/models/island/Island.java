@@ -7,8 +7,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Island implements Runnable {
-    public static final int X = Settings.inst().getX();
-    public static final int Y = Settings.inst().getY();
+    public static final int X = Settings.getX();
+    public static final int Y = Settings.getY();
     public static Location[][] locations = new Location[X][Y];
     ExecutorService executor = Executors.newFixedThreadPool(Island.X * Island.Y);
 

@@ -1,27 +1,53 @@
 package com.axlle.models.live.animals;
 
+import com.axlle.config.Settings;
 import com.axlle.models.island.Island;
 import com.axlle.models.live.Live;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Animal extends Live {
     protected Integer moveToX = null;
     protected Integer moveToY = null;
-    private int speed;
+    private double speed;
     private double saturation;
     private double maxSaturation;
 
-    public static int rnd(int min, int max) {
-        max -= min;
-        return (int) (Math.random() * ++max) + min;
+    public Animal() {
+        this.setUuid();
+        HashMap<String, Double> set = Settings.getLivesSetting(this.getClass().getName());
+        if (set != null) {
+            for (Map.Entry<String, Double> current : set.entrySet()) {
+                Double value = current.getValue();
+                String key = current.getKey();
+                if (key.equals("weight")) {
+                    this.setWeight(value);
+                }
+                if (key.equals("maxSaturation")) {
+                    this.setMaxSaturation(value);
+                }
+                if (key.equals("speed")) {
+                    this.setSpeed(value);
+                }
+            }
+        }
+        HashMap<String, Integer> ration = Settings.getLivesRation(this.getClass().getName());
+        if (ration != null) {
+            for (Map.Entry<String, Integer> current : ration.entrySet()) {
+                Integer value = current.getValue();
+                String key = current.getKey();
+                this.ration.put(key, value);
+            }
+        }
     }
 
     public int getSpeed() {
-        return speed;
+        return (int) speed;
     }
 
-    public Animal setSpeed(int speed) {
+    public Animal setSpeed(double speed) {
         this.speed = speed;
         return this;
     }

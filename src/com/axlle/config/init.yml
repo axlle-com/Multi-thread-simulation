@@ -1,19 +1,145 @@
 x: 3
 y: 3
 maxLives:
-  "com.axlle.models.live.animals.predators.Bear": 5
-  "com.axlle.models.live.animals.predators.Boa": 30
-  "com.axlle.models.live.animals.predators.Fox": 30
-  "com.axlle.models.live.animals.predators.Wolf": 30
-  "com.axlle.models.live.animals.herbivores.Boar": 50
-  "com.axlle.models.live.animals.herbivores.Deer": 20
-  "com.axlle.models.live.animals.herbivores.Duck": 200
-  "com.axlle.models.live.animals.herbivores.Goat": 140
-  "com.axlle.models.live.animals.predators.Eagle": 20
-  "com.axlle.models.live.animals.herbivores.Horse": 20
-  "com.axlle.models.live.animals.herbivores.Mouse": 500
-  "com.axlle.models.live.animals.herbivores.Sheep": 140
-  "com.axlle.models.live.plants.Plant": 200
-  "com.axlle.models.live.animals.herbivores.Rabbit": 150
-  "com.axlle.models.live.animals.herbivores.Buffalo": 10
-  "com.axlle.models.live.animals.herbivores.Caterpillar": 1000
+  com.axlle.models.live.animals.predators.Bear: 5
+  com.axlle.models.live.animals.predators.Boa: 30
+  com.axlle.models.live.animals.predators.Fox: 30
+  com.axlle.models.live.animals.predators.Wolf: 30
+  com.axlle.models.live.animals.herbivores.Boar: 50
+  com.axlle.models.live.animals.herbivores.Deer: 20
+  com.axlle.models.live.animals.herbivores.Duck: 200
+  com.axlle.models.live.animals.herbivores.Goat: 140
+  com.axlle.models.live.animals.predators.Eagle: 20
+  com.axlle.models.live.animals.herbivores.Horse: 20
+  com.axlle.models.live.animals.herbivores.Mouse: 500
+  com.axlle.models.live.animals.herbivores.Sheep: 140
+  com.axlle.models.live.plants.Plant: 200
+  com.axlle.models.live.animals.herbivores.Rabbit: 150
+  com.axlle.models.live.animals.herbivores.Buffalo: 10
+  com.axlle.models.live.animals.herbivores.Caterpillar: 1000
+livesSetting:
+  com.axlle.models.live.animals.predators.Bear:
+    weight: 500
+    maxSaturation: 80
+    speed: 2
+  com.axlle.models.live.animals.predators.Boa:
+    weight: 15
+    maxSaturation: 3
+    speed: 1
+  com.axlle.models.live.animals.predators.Fox:
+    weight: 8
+    maxSaturation: 2
+    speed: 2
+  com.axlle.models.live.animals.predators.Wolf:
+    weight: 50
+    maxSaturation: 8
+    speed: 3
+  com.axlle.models.live.animals.herbivores.Boar:
+    weight: 400
+    maxSaturation: 50
+    speed: 3
+  com.axlle.models.live.animals.herbivores.Deer:
+    weight: 300
+    maxSaturation: 50
+    speed: 4
+  com.axlle.models.live.animals.herbivores.Duck:
+    weight: 1
+    maxSaturation: 0.15
+    speed: 4
+  com.axlle.models.live.animals.herbivores.Goat:
+    weight: 60
+    maxSaturation: 10
+    speed: 3
+  com.axlle.models.live.animals.predators.Eagle:
+    weight: 6
+    maxSaturation: 1
+    speed: 1
+  com.axlle.models.live.animals.herbivores.Horse:
+    weight: 400
+    maxSaturation: 60
+    speed: 4
+  com.axlle.models.live.animals.herbivores.Mouse:
+    weight: 0.05
+    maxSaturation: 0.01
+    speed: 1
+  com.axlle.models.live.animals.herbivores.Sheep:
+    weight: 70
+    maxSaturation: 15
+    speed: 3
+  com.axlle.models.live.animals.herbivores.Rabbit:
+    weight: 2
+    maxSaturation: 0.45
+    speed: 2
+  com.axlle.models.live.animals.herbivores.Buffalo:
+    weight: 700
+    maxSaturation: 100
+    speed: 3
+  com.axlle.models.live.animals.herbivores.Caterpillar:
+    weight: 0.01
+    maxSaturation: 0
+    speed: 0
+  com.axlle.models.live.plants.Plant:
+    weight: 1
+    maxSaturation: 0
+    speed: 0
+livesRation:
+  com.axlle.models.live.animals.predators.Bear:
+    Boa: 80
+    Horse: 40
+    Deer: 80
+    Rabbit: 80
+    Mouse: 90
+    Goat: 70
+    Sheep: 70
+    Boar: 50
+    Buffalo: 20
+    Duck: 10
+  com.axlle.models.live.animals.predators.Boa:
+    Fox: 15
+    Rabbit: 20
+    Mouse: 40
+    Duck: 10
+  com.axlle.models.live.animals.predators.Fox:
+    Rabbit: 70
+    Mouse: 90
+    Duck: 60
+    Caterpillar: 40
+  com.axlle.models.live.animals.predators.Wolf:
+    Horse: 10
+    Deer: 15
+    Rabbit: 60
+    Mouse: 80
+    Goat: 60
+    Sheep: 70
+    Boar: 15
+    Buffalo: 10
+    Duck: 40
+  com.axlle.models.live.animals.herbivores.Boar:
+    Plant: 100
+    Mouse: 50
+    Caterpillar: 90
+  com.axlle.models.live.animals.herbivores.Deer:
+    Plant: 100
+  com.axlle.models.live.animals.herbivores.Duck:
+    Plant: 100
+    Caterpillar: 90
+  com.axlle.models.live.animals.herbivores.Goat:
+    Plant: 100
+  com.axlle.models.live.animals.predators.Eagle:
+    Fox: 10
+    Rabbit: 90
+    Mouse: 90
+    Duck: 80
+  com.axlle.models.live.animals.herbivores.Horse:
+    Plant: 100
+  com.axlle.models.live.animals.herbivores.Mouse:
+    Plant: 100
+    Caterpillar: 90
+  com.axlle.models.live.animals.herbivores.Sheep:
+    Plant: 100
+  com.axlle.models.live.animals.herbivores.Rabbit:
+    Plant: 100
+  com.axlle.models.live.animals.herbivores.Buffalo:
+    Plant: 100
+  com.axlle.models.live.animals.herbivores.Caterpillar:
+    Plant: 100
