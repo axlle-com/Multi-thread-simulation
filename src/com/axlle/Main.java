@@ -1,6 +1,5 @@
 package com.axlle;
 
-import com.axlle.config.Settings;
 import com.axlle.models.island.Island;
 
 import java.util.concurrent.Executors;
