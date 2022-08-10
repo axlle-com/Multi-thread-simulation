@@ -16,24 +16,6 @@ public abstract class Live {
     private Boolean live = true;
     private Boolean isReproduce = false;
 
-    public Live() {
-        this.setUuid();
-        HashMap<String, Double> set = Settings.getLivesSetting(this.getClass().getName());
-        if (set != null) {
-            for (Map.Entry<String, Double> current : set.entrySet()) {
-                Double value = current.getValue();
-                String key = current.getKey();
-                if (key.equals("weight")) {
-                    this.setWeight(value);
-                }
-                if (key.equals("maxSaturation")) {
-                    this.setWeight(value);
-                }
-            }
-        }
-
-    }
-
     public Boolean getReproduce() {
         return isReproduce;
     }
