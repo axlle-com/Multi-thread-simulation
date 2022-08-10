@@ -9,6 +9,10 @@ import java.util.Map;
 public class Plant extends Live {
     public Plant() {
         this.setUuid();
+        this.setSetting();
+    }
+
+    public void setSetting() {
         HashMap<String, Double> set = Settings.getLivesSetting(this.getClass().getName());
         if (set != null) {
             for (Map.Entry<String, Double> current : set.entrySet()) {

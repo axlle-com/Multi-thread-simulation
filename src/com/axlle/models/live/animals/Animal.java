@@ -6,6 +6,7 @@ import com.axlle.models.live.Live;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 public abstract class Animal extends Live {
@@ -17,8 +18,13 @@ public abstract class Animal extends Live {
 
     public Animal() {
         this.setUuid();
+        this.setSetting();
+        this.setRation();
+    }
+
+    public void setSetting() {
         HashMap<String, Double> set = Settings.getLivesSetting(this.getClass().getName());
-        if (set != null) {
+        if (Objects.nonNull(set)) {
             for (Map.Entry<String, Double> current : set.entrySet()) {
                 Double value = current.getValue();
                 String key = current.getKey();
@@ -33,8 +39,11 @@ public abstract class Animal extends Live {
                 }
             }
         }
+    }
+
+    public void setRation() {
         HashMap<String, Integer> ration = Settings.getLivesRation(this.getClass().getName());
-        if (ration != null) {
+        if (Objects.nonNull(ration)) {
             for (Map.Entry<String, Integer> current : ration.entrySet()) {
                 Integer value = current.getValue();
                 String key = current.getKey();
@@ -47,9 +56,8 @@ public abstract class Animal extends Live {
         return (int) speed;
     }
 
-    public Animal setSpeed(double speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
-        return this;
     }
 
     public double getSaturation() {
